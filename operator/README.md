@@ -24,8 +24,8 @@ Confirm: `./target/release/zeroclaw plugin list` works.
 ## 2) Build Caixa plugins
 
 ```bash
-git clone https://github.com/thesithunyein/zeroclaw-plugins.git
-cd zeroclaw-plugins && git checkout feat/caixa-payment-terminal
+git clone https://github.com/thesithunyein/caixa.git
+cd caixa
 rustup target add wasm32-wasip2
 
 (cd plugins/caixa-charge && cargo test && cargo build --target wasm32-wasip2 --release \
