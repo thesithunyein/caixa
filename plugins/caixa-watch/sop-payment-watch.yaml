@@ -1,0 +1,20 @@
+# Cron SOP — poll last Caixa invoice and notify Telegram when paid.
+# Install via your ZeroClaw SOP/cron flow; adapt agent + channel names.
+#
+# Daily loop:
+#   1) Owner: "Cobra mesa 9: R$ 25" → caixa_charge
+#   2) Customer pays USDC (Pay QR / solana:)
+#   3) This SOP → caixa_watch → "Invoice #… paid" in Telegram
+
+name: caixa-payment-watch
+description: Close the loop on Caixa Solana Pay invoices every minute
+trigger:
+  cron: "*/1 * * * *"
+steps:
+  - tool: caixa_watch
+    args:
+      invoice_id: "{{memory.last_invoice_id}}"
+      amount_usdc: "{{memory.last_invoice_usdc}}"
+    on_success:
+      notify_channel: telegram
+      message: "{{tool.output}}"
