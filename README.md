@@ -120,9 +120,21 @@ Cobra mesa 9: R$ 25
 A mesa 9 já pagou?
 ```
 
-## Subir o terminal
+## Subir o terminal (uma noite)
 
-Kit de operador (uma noite): [operator/README.md](operator/README.md)
+**Atalho:** [operator/EVENING.md](operator/EVENING.md)
+
+```bash
+# host ZeroClaw com plugins-wasm (uma vez)
+# depois, neste repo:
+bash scripts/install-plugins.sh          # ou install-from-artifact.sh
+bash scripts/setup-agent.sh caixa
+# merge operator/config.example.toml → recipient = sua pubkey
+zeroclaw daemon -v
+# Telegram → Cobra mesa 9: R$ 25
+```
+
+Prebuilt WASM: [GitHub Actions → plugins-wasm](https://github.com/thesithunyein/caixa/actions) (artifact `caixa-plugins-wasm`).
 
 ```text
 crates/caixa-core/                 Pay, RPC, SPL, quote BRL→USDC
@@ -130,6 +142,7 @@ plugins/caixa-charge/              cobrança Solana Pay
 plugins/caixa-watch/               conferência on-chain (+ SOP cron)
 plugins/caixa-transfer-build/      estorno/saque unsigned
 operator/                          SOUL, config, dia a dia
+scripts/                           install + agent setup
 skills/caixa-terminal/             fallback stock binary (opcional)
 ```
 

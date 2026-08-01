@@ -1,87 +1,77 @@
-# Operator kit — run Caixa tonight
+# Operator kit — stand up the shop till tonight
 
-Goal: another person can stand up the same Telegram **shop terminal** in an evening — then run the [daily loop](DAY.md), not a chat demo.
+Goal: another person runs the same Telegram terminal in an **evening**, then uses [DAY.md](DAY.md) every day.
 
-## 0) What you need
+**Start here:** [EVENING.md](EVENING.md) (fast path + scripts).
 
-- A machine that can build ZeroClaw from source with WASM plugins
-- Telegram bot token + an OpenAI-compatible (or other) model key
-- Your Solana merchant address (USDC ATA owner)
-- Optional: durable nonce account if you use transfer-build
+## 0) Need
 
-## 1) ZeroClaw host (plugins-wasm)
+- ZeroClaw built with WASM plugins (stock lean builds often omit this)
+- Telegram bot token + model key
+- Your Solana merchant pubkey (USDC)
+- Optional: durable nonce for refunds
 
-Stock “lean” binaries often **omit** the WASM plugin host. Build:
+## 1) ZeroClaw host (`plugins-wasm`)
 
 ```bash
 git clone https://github.com/zeroclaw-labs/zeroclaw.git
-cd zeroclaw && git checkout v0.8.3   # or current tag you trust
+cd zeroclaw && git checkout v0.8.3   # or a tag you trust
 cargo build --release --features plugins-wasm,plugins-wasm-cranelift,channel-telegram,agent-runtime,gateway
+./target/release/zeroclaw plugin list   # must work
 ```
 
-Confirm: `./target/release/zeroclaw plugin list` works.
+## 2) Caixa plugins (pick one)
 
-## 2) Build Caixa plugins
+**Prebuilt (preferred for strangers):**  
+Actions artifact → [`scripts/install-from-artifact.sh`](../scripts/install-from-artifact.sh)
+
+**From source:**
 
 ```bash
 git clone https://github.com/thesithunyein/caixa.git
 cd caixa
-rustup target add wasm32-wasip2
-
-(cd plugins/caixa-charge && cargo test && cargo build --target wasm32-wasip2 --release \
-  && cp target/wasm32-wasip2/release/caixa_charge.wasm ./caixa_charge.wasm)
-(cd plugins/caixa-transfer-build && cargo test && cargo build --target wasm32-wasip2 --release \
-  && cp target/wasm32-wasip2/release/caixa_transfer_build.wasm ./caixa_transfer_build.wasm)
-(cd plugins/caixa-watch && cargo test && cargo build --target wasm32-wasip2 --release \
-  && cp target/wasm32-wasip2/release/caixa_watch.wasm ./caixa_watch.wasm)
-
-mkdir -p ~/.zeroclaw/plugins
-cp -a plugins/caixa-charge plugins/caixa-transfer-build plugins/caixa-watch ~/.zeroclaw/plugins/
+bash scripts/install-plugins.sh
 ```
 
 ## 3) Config
 
-Merge the shapes in [`config.example.toml`](config.example.toml) into `~/.zeroclaw/config.toml`:
+Merge [`config.example.toml`](config.example.toml) into `~/.zeroclaw/config.toml`:
 
-- Set `recipient` to **your** merchant pubkey
-- Set `brl_per_usdc` if CoinGecko is flaky in your region
-- Wire Telegram + model provider through normal `zeroclaw` / quickstart (never commit bot tokens)
+- `recipient` = **your** merchant pubkey (charge + watch)
+- `brl_per_usdc` if FX API is flaky
+- Wire Telegram + model via normal ZeroClaw quickstart (never commit tokens)
+- Prefer `excluded_tools` including `shell` / `http_request` so the model cannot bypass plugins
 
-ZeroClaw 0.8+ plugin settings use `[[plugins.entries]]`, not `[plugins.caixa-charge]`.
+ZeroClaw 0.8+: `[[plugins.entries]]`, not `[plugins.caixa-charge]`.
 
-## 4) Agent soul
+## 4) Soul
 
-Copy [`SOUL.md`](SOUL.md) and [`AGENTS.md`](AGENTS.md) into your agent workspace  
-(e.g. `~/.zeroclaw/agents/caixa/workspace/`).
+```bash
+bash scripts/setup-agent.sh caixa
+```
 
-## 4b) Optional cron SOP (paid alert without asking)
+## 4b) Optional cron SOP
 
-Install [`../plugins/caixa-watch/sop-payment-watch.yaml`](../plugins/caixa-watch/sop-payment-watch.yaml) via your ZeroClaw SOP/cron flow.  
-It polls `caixa_watch` every minute using `memory.last_invoice_id` after a charge.  
-Manual `A mesa 9 já pagou?` still works without cron.
+[`../plugins/caixa-watch/sop-payment-watch.yaml`](../plugins/caixa-watch/sop-payment-watch.yaml) — polls `caixa_watch` every minute.  
+Manual `A mesa 9 já pagou?` works without cron.
 
 ## 5) Run
 
 ```bash
-zeroclaw plugin list          # should list caixa-*
+zeroclaw plugin list    # caixa-charge, caixa-watch, caixa-transfer-build
 zeroclaw daemon -v
 ```
 
-In Telegram (bound peer):
+Telegram:
 
 ```
 Cobra mesa 9: R$ 25
 ```
 
-You should get:
+Expect: HTTPS Pay QR + `solana:` → customer pays → `PAGO`.
 
-1. HTTPS **Pay QR** link (opens a QR image — scan with Phantom)
-2. Raw `solana:…` URL
+## Safety
 
-## Safety checklist
-
-- No private keys in config
-- `auto_approve` includes `caixa_charge` / `caixa_watch` only as you trust
-- Exclude `shell` / `http_request` if the model keeps bypassing the plugin
-- Run [INJECTION.md](INJECTION.md) once before you trust the till
-- Read [LAYERING.md](LAYERING.md) if you wonder why this is not “just a skill”
+- No private keys in config  
+- [INJECTION.md](INJECTION.md) once before trusting the till  
+- [LAYERING.md](LAYERING.md) — why WASM, not only a skill  

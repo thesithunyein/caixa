@@ -15,7 +15,8 @@
 | Product repo | https://github.com/thesithunyein/caixa |
 | Telegram bot | https://t.me/caixa_zeroclaw_bot |
 | Day sheet | [operator/DAY.md](operator/DAY.md) |
-| Evening setup | [operator/README.md](operator/README.md) |
+| Evening setup | [operator/EVENING.md](operator/EVENING.md) · [operator/README.md](operator/README.md) |
+| Prebuilt WASM | https://github.com/thesithunyein/caixa/actions |
 | Injection test | [operator/INJECTION.md](operator/INJECTION.md) |
 | Why WASM (layering) | [operator/LAYERING.md](operator/LAYERING.md) |
 | SOUL / AGENTS | [operator/SOUL.md](operator/SOUL.md) · [operator/AGENTS.md](operator/AGENTS.md) |
@@ -89,9 +90,17 @@ Phantom `ul/browse` + `solana:` = blank page. Caixa returns an HTTPS **QR image*
 
 ## Reproduce tonight
 
-Follow [operator/README.md](operator/README.md) — source-build ZeroClaw with `plugins-wasm`, install three `.wasm` tools, merge redacted config, copy SOUL, run daemon, send `Cobra mesa 9: R$ 25`.
+**Short path:** [operator/EVENING.md](operator/EVENING.md)
+
+1. Source-build ZeroClaw with `plugins-wasm` (once)
+2. Install Caixa plugins via **Actions artifact** (`scripts/install-from-artifact.sh`) or `scripts/install-plugins.sh`
+3. Merge [operator/config.example.toml](operator/config.example.toml) — your merchant pubkey
+4. `scripts/setup-agent.sh caixa`
+5. `zeroclaw daemon` → `Cobra mesa 9: R$ 25`
 
 Success = another operator says they stood up the same Telegram till in an evening.
+
+CI builds the three `.wasm` tools on every `main` push: https://github.com/thesithunyein/caixa/actions
 
 ## Next (product, not scope creep)
 

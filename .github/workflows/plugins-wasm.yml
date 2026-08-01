@@ -1,0 +1,59 @@
+name: plugins-wasm
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip2
+
+      - name: Build + test plugins
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          for name in caixa-charge caixa-transfer-build caixa-watch; do
+            crate="${name//-/_}"
+            (
+              cd "plugins/$name"
+              cargo test
+              cargo build --target wasm32-wasip2 --release
+              cp "target/wasm32-wasip2/release/${crate}.wasm" "../../dist/${crate}.wasm"
+              cp manifest.toml "../../dist/${name}.manifest.toml"
+            )
+          done
+          cp plugins/caixa-watch/sop-payment-watch.yaml dist/
+          (
+            cd dist
+            zip -9 caixa-plugins-wasm.zip \
+              caixa_charge.wasm \
+              caixa_watch.wasm \
+              caixa_transfer_build.wasm \
+              caixa-charge.manifest.toml \
+              caixa-watch.manifest.toml \
+              caixa-transfer-build.manifest.toml \
+              sop-payment-watch.yaml
+          )
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: caixa-plugins-wasm
+          path: dist/caixa-plugins-wasm.zip
+          if-no-files-found: error
+
+      - name: Attach to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/caixa-plugins-wasm.zip

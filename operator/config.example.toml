@@ -1,5 +1,8 @@
 # Redacted operator shape for Caixa — merge into ~/.zeroclaw/config.toml
 # Fill secrets via `zeroclaw` CLI / quickstart. Do not commit real tokens.
+# 1) Set recipient (both charge + watch) to YOUR Solana merchant pubkey
+# 2) Wire Telegram bot + model elsewhere in this file
+# 3) Prefer excluding shell/http_request so the model cannot bypass plugins
 
 [plugins]
 enabled = true
