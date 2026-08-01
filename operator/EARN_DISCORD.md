@@ -19,9 +19,14 @@ https://x.com/thesithunyein/status/2079171135250571466
 https://github.com/thesithunyein/caixa/blob/main/SHOWCASE.md
 ```
 
-**Anything Else?**
+**Anything Else? / Supporting**
 ```
-Caixa = real shop payment terminal on Telegram: charge in BRL, customer pays USDC in Phantom, owner checks paid in the same chat. Agent never holds keys. Injection refuses on camera. Day sheet + evening setup in /operator.
+Product: https://github.com/thesithunyein/caixa
+Showcase: https://github.com/thesithunyein/caixa/blob/main/SHOWCASE.md
+Setup: https://github.com/thesithunyein/caixa/blob/main/operator/README.md
+Injection: https://github.com/thesithunyein/caixa/blob/main/operator/INJECTION.md
+Judge map: https://github.com/thesithunyein/caixa/blob/main/JUDGES.md
+Caixa = Telegram shop till: BRL → Solana Pay QR → customer pays USDC → PAGO. T1/T0, no keys. Caps/allowlist/injection fail-closed in WASM (layering defended in /operator/LAYERING.md).
 ```
 
 ## Discord `#solana-bounty`

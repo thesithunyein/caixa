@@ -21,6 +21,8 @@ O agente **nunca segura chave**. Cliente assina na carteira dele.
 | [operator/DAY.md](operator/DAY.md) | Dono da loja — o que digitar todo dia |
 | [operator/README.md](operator/README.md) | Subir o terminal em uma noite |
 | [SHOWCASE.md](SHOWCASE.md) | Loop + reproduce (juízes / Discord) |
+| [JUDGES.md](JUDGES.md) | Mapa do rubrica do bounty |
+| [operator/INJECTION.md](operator/INJECTION.md) | Teste de prompt-injection |
 | [operator/RECORDING.md](operator/RECORDING.md) | Script do demo |
 
 ## Peças

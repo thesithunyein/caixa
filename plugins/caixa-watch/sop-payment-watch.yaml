@@ -2,9 +2,9 @@
 # Install via your ZeroClaw SOP/cron flow; adapt agent + channel names.
 #
 # Daily loop:
-#   1) Owner: "Cobra mesa 9: R$ 25" → caixa_charge
+#   1) Owner: "Cobra mesa 9: R$ 25" → caixa_charge (stores last invoice in memory)
 #   2) Customer pays USDC (Pay QR / solana:)
-#   3) This SOP → caixa_watch → "Invoice #… paid" in Telegram
+#   3) This SOP → caixa_watch → PAGO / ainda não in Telegram
 
 name: caixa-payment-watch
 description: Close the loop on Caixa Solana Pay invoices every minute
@@ -18,3 +18,4 @@ steps:
     on_success:
       notify_channel: telegram
       message: "{{tool.output}}"
+

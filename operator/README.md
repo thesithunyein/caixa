@@ -51,7 +51,14 @@ ZeroClaw 0.8+ plugin settings use `[[plugins.entries]]`, not `[plugins.caixa-cha
 
 ## 4) Agent soul
 
-Copy [`SOUL.md`](SOUL.md) into your agent workspace (e.g. `~/.zeroclaw/agents/caixa/workspace/SOUL.md`).
+Copy [`SOUL.md`](SOUL.md) and [`AGENTS.md`](AGENTS.md) into your agent workspace  
+(e.g. `~/.zeroclaw/agents/caixa/workspace/`).
+
+## 4b) Optional cron SOP (paid alert without asking)
+
+Install [`../plugins/caixa-watch/sop-payment-watch.yaml`](../plugins/caixa-watch/sop-payment-watch.yaml) via your ZeroClaw SOP/cron flow.  
+It polls `caixa_watch` every minute using `memory.last_invoice_id` after a charge.  
+Manual `A mesa 9 já pagou?` still works without cron.
 
 ## 5) Run
 
@@ -71,10 +78,10 @@ You should get:
 1. HTTPS **Pay QR** link (opens a QR image — scan with Phantom)
 2. Raw `solana:…` URL
 
-Optional: install [`../plugins/caixa-watch/sop-payment-watch.yaml`](../plugins/caixa-watch/sop-payment-watch.yaml) as a cron SOP to poll unpaid invoices.
-
 ## Safety checklist
 
 - No private keys in config
 - `auto_approve` includes `caixa_charge` / `caixa_watch` only as you trust
 - Exclude `shell` / `http_request` if the model keeps bypassing the plugin
+- Run [INJECTION.md](INJECTION.md) once before you trust the till
+- Read [LAYERING.md](LAYERING.md) if you wonder why this is not “just a skill”

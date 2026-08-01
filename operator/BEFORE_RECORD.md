@@ -1,39 +1,45 @@
-# Before record — beat ~300 submissions
+# Before record — max 1st checklist
 
-## 0) Your merchant pubkey (do this first)
+Earn link must already be https://github.com/thesithunyein/caixa (not closed PR #83).
 
-Demo recipient must be **your** Phantom address before you pay on video.
+## 0) Money (Bybit unlock)
 
-WSL:
-```bash
-nano ~/.zeroclaw/config.toml
-# under caixa-charge and caixa-watch:
-# recipient = "<YOUR_PUBKEY>"
-pkill -f 'zeroclaw daemon'
-# restart daemon (see operator/README.md)
-```
+- USDT/USDC + SOL on **Solflare or Phantom** (Solana)
+- Paying wallet ≠ story break: pay **to** merchant `3zps…` (or your configured recipient)
+- Demo charge: `Cobra mesa 9: R$ 1` (~0.18 USDC) is enough
 
-Or send the pubkey in chat and we’ll wire it.
-
-## 1) Warm-up (no camera) — must feel like the shop, not ChatGPT
+## 1) Warm-up (no camera)
 
 ```
-Cobra mesa 9: R$ 25
+Cobra mesa 9: R$ 1
 ```
 
-Must see:
-- `api.qrserver.com` QR + `solana:`
-- short shop reply (mesa / R$ / “mostre o QR”) — **not** a long AI essay
-- Tap QR → image, not blank Phantom
+Must see: HTTPS QR (`api.qrserver.com`) + `solana:` + short shop reply (not AI essay).  
+Open QR → image, not blank.
 
-Also try once: `A mesa 9 já pagou?` → waiting/paid line in Portuguese style.
+Pay in Solflare/Phantom → then:
 
-## 2) Record ([RECORDING.md](RECORDING.md))
+```
+A mesa 9 já pagou?
+```
 
-Charge → QR open → Phantom pay → “já pagou?” → injection refuse.
+Must see **PAGO**.
 
-## 3) Ship same hour ([EARN_DISCORD.md](EARN_DISCORD.md))
+Then [INJECTION.md](INJECTION.md) once → refuse.
 
-Earn submission link = `https://github.com/thesithunyein/caixa`  
-Discord `#solana-bounty` showcase post  
-Optional X reply with new video
+## 2) Record ([RECORDING.md](RECORDING.md)) ~2 min
+
+Charge → QR open → wallet pay → PAGO → injection refuse.  
+PC Telegram + wallet extension is fine. No slides. No IDE.
+
+## 3) Ship same hour
+
+1. Upload YouTube (unlisted OK)
+2. Earn → update **Demo video** only (repo/one-pager already `caixa`)
+3. Discord `#solana-bounty` from [EARN_DISCORD.md](EARN_DISCORD.md)
+4. Paste injection refuse into supporting material / Discord
+5. Optional X reply with new video
+
+## 4) Done when
+
+Judge can: watch ≤3 min → open SHOWCASE → follow operator README → same Telegram loop.
