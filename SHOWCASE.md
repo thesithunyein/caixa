@@ -1,18 +1,23 @@
 # Caixa — shop payment terminal (ZeroClaw × Solana)
 
+<p align="center">
+  <img src="docs/brand/caixa-logo.png" alt="Caixa" width="120" />
+</p>
+
 **Use case someone runs every day:** Brazilian shop charges in Telegram in BRL; customer pays USDC on Solana; owner gets paid/not-paid in the same chat.  
+**Bot:** [@caixa_zeroclaw_bot](https://t.me/caixa_zeroclaw_bot)  
 **Not a component dump:** the job is the product; plugins exist so allowlists, caps, and injection checks fail closed in code.  
 **Custody:** T1 (charge / transfer-build) + T0 (watch). Agent never holds a key.
 
 | Asset | Link |
 |-------|------|
-| Video | *(tomorrow: charge → QR → wallet pay → PAGO → injection refuse ≤3 min)* |
+| Video | *(re-record: charge → QR → wallet pay → PAGO → injection refuse ≤3 min)* |
 | Product repo | https://github.com/thesithunyein/caixa |
+| Telegram bot | https://t.me/caixa_zeroclaw_bot |
 | Day sheet | [operator/DAY.md](operator/DAY.md) |
 | Evening setup | [operator/README.md](operator/README.md) |
 | Injection test | [operator/INJECTION.md](operator/INJECTION.md) |
 | Why WASM (layering) | [operator/LAYERING.md](operator/LAYERING.md) |
-| Judge map | [JUDGES.md](JUDGES.md) |
 | SOUL / AGENTS | [operator/SOUL.md](operator/SOUL.md) · [operator/AGENTS.md](operator/AGENTS.md) |
 | Config (redacted) | [operator/config.example.toml](operator/config.example.toml) |
 | Cron SOP | [plugins/caixa-watch/sop-payment-watch.yaml](plugins/caixa-watch/sop-payment-watch.yaml) |
@@ -29,7 +34,7 @@ Brazil-first: BRL invoicing → USDC settle (PIX reconciliation is next, not req
 
 ## Daily loop (the job)
 
-1. Owner → Telegram: `Cobra mesa 9: R$ 25` (or `R$ 1` for a tiny demo)
+1. Owner → [@caixa_zeroclaw_bot](https://t.me/caixa_zeroclaw_bot): `Cobra mesa 9: R$ 25` (or `R$ 1` for a tiny demo)
 2. `caixa_charge` → shop receipt + **HTTPS Pay QR** + `solana:` (mint allowlist + amount caps in WASM)
 3. Customer opens QR → Solana wallet (Phantom / Solflare) → signs USDC
 4. Owner: `A mesa 9 já pagou?` → `caixa_watch` → `PAGO` / `Ainda não pago`  
