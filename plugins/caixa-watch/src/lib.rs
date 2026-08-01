@@ -55,10 +55,9 @@ mod component {
         }
 
         fn description() -> String {
-            "Verifica se uma fatura Caixa (INV=…) já foi paga on-chain e devolve um alerta curto para SOP/Telegram. \
-             Somente leitura (T0). \
-             Checks whether a Caixa invoice (INV=…) has been paid on-chain and returns a short alert for SOP/Telegram. \
-             Read-only (custody T0)."
+            "Só para CONFERIR se já pagou (ex: 'A mesa 9 já pagou?'). Somente leitura. \
+             NÃO use se a mensagem for cobrança nova ('cobra…', 'R$ …') — nesse caso use caixa_charge. \
+             STATUS ONLY ('já pagou?'). Never for new charges with R$ amounts."
                 .to_string()
         }
 

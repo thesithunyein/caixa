@@ -64,11 +64,10 @@ mod component {
         }
 
         fn description() -> String {
-            "Cria uma cobrança Solana Pay em USDC a partir de um valor em BRL ou USDC. \
-             Retorna URL solana: + payload para QR. Nunca assina e nunca guarda chave (T1). \
-             Use quando o comerciante pedir para cobrar uma mesa/fatura (ex: 'Cobra mesa 4: R$ 25'). \
-             Creates a Solana Pay USDC charge from BRL or USDC. Returns solana: URL + QR payload. \
-             Never signs; holds no keys (custody T1)."
+            "OBRIGATÓRIO para criar cobrança. Se a mensagem tiver 'cobra'/'cobrar'/'cobrança' \
+             ou valor em R$/reais (ex: 'Cobra mesa 9: R$ 25'), chame ESTA tool — NÃO caixa_watch. \
+             Cria Solana Pay USDC + QR HTTPS. Nunca assina / nunca guarda chave. \
+             REQUIRED for new charges. Any 'cobra' or R$ amount → this tool, never watch."
                 .to_string()
         }
 
