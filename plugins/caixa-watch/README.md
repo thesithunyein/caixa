@@ -44,9 +44,9 @@ lookback = "25"
 Paid:
 
 ```
-Invoice #412 paid → 5.000000 USDC from 7xK…ab12.
-Signature: 5abcde…9xyz
-Custody: T0 read-only watch — no keys, no transfers.
+PAGO — 412 → 5.000000 USDC de 7xK…ab12
+Assinatura: 5abcde…9xyz
+Recebido em Tok…5DA
 ```
 
 ## Threat model

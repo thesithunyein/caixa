@@ -161,27 +161,23 @@ pub fn execute_charge<H: HttpGet>(
     })?;
 
     let pay_qr = solana_pay_qr_https(&url);
+    let brl_line = amount_brl_str
+        .as_ref()
+        .map(|b| format!("R$ {b} → "))
+        .unwrap_or_default();
     let summary = shape_output(&format!(
-        "Caixa charge ready (T1 — no keys held).\n\
-         Invoice: {}\n\
-         Amount: {} USDC{}\n\
-         Recipient: {}\n\
-         Mint: {}\n\
-         Memo: {}\n\
-         Pay QR (tap/open, then scan with Phantom — paste as plain text, no markdown):\n{}\n\
-         Solana Pay URL:\n{}\n\
-         Customer wallet signs. Agent never signs or submits.",
-        args.invoice_id,
-        amount_usdc,
-        amount_brl_str
-            .as_ref()
-            .map(|b| format!(" (quoted from R$ {b})"))
-            .unwrap_or_default(),
-        recipient.short(),
-        mint.short(),
-        memo,
-        pay_qr,
-        url
+        "Cobrança {inv} pronta\n\
+         {brl}{usdc} USDC → {recv}\n\
+         Memo: {memo}\n\
+         QR (cliente abre e escaneia no Phantom):\n{qr}\n\
+         solana:\n{url}",
+        inv = args.invoice_id,
+        brl = brl_line,
+        usdc = amount_usdc,
+        recv = recipient.short(),
+        memo = memo,
+        qr = pay_qr,
+        url = url,
     ));
 
     Ok(ChargeResult {

@@ -14,7 +14,7 @@ recipient = "<YOUR_MERCHANT_PUBKEY>"
 max_brl = "5000"
 max_usdc = "1000"
 brl_per_usdc = "5.50"
-label = "Caixa"
+label = "Caixa Loja"
 
 [[plugins.entries]]
 name = "caixa-watch"

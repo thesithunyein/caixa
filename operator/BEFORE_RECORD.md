@@ -15,13 +15,18 @@ pkill -f 'zeroclaw daemon'
 
 Or send the pubkey in chat and we’ll wire it.
 
-## 1) Warm-up (no camera)
+## 1) Warm-up (no camera) — must feel like the shop, not ChatGPT
 
 ```
 Cobra mesa 9: R$ 25
 ```
 
-Must see `api.qrserver.com` QR link + `solana:`. Tap QR → image, not blank.
+Must see:
+- `api.qrserver.com` QR + `solana:`
+- short shop reply (mesa / R$ / “mostre o QR”) — **not** a long AI essay
+- Tap QR → image, not blank Phantom
+
+Also try once: `A mesa 9 já pagou?` → waiting/paid line in Portuguese style.
 
 ## 2) Record ([RECORDING.md](RECORDING.md))
 

@@ -1,6 +1,6 @@
 # Operator kit — run Caixa tonight
 
-Goal: another person can stand up the same Telegram payment terminal in an evening.
+Goal: another person can stand up the same Telegram **shop terminal** in an evening — then run the [daily loop](DAY.md), not a chat demo.
 
 ## 0) What you need
 

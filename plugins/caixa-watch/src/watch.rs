@@ -140,15 +140,14 @@ pub fn execute_watch<T: RpcTransport>(
             .unwrap_or_else(|| "unknown".into());
 
         let summary = shape_output(&format!(
-            "Invoice #{} paid →{} from {}.\n\
-             Signature: {}\n\
-             Recipient: {}\n\
-             Custody: T0 read-only watch — no keys, no transfers.",
-            args.invoice_id,
-            amount_bit,
-            from,
-            short_sig(&sig.signature),
-            recipient.short()
+            "PAGO — {inv}{amount} de {from}\n\
+             Assinatura: {sig}\n\
+             Recebido em {recv}",
+            inv = args.invoice_id,
+            amount = amount_bit,
+            from = from,
+            sig = short_sig(&sig.signature),
+            recv = recipient.short(),
         ));
         return Ok(WatchResult {
             summary,
@@ -158,10 +157,10 @@ pub fn execute_watch<T: RpcTransport>(
 
     Ok(WatchResult {
         summary: shape_output(&format!(
-            "Invoice #{} not seen yet on {} (lookback {}). Still waiting.",
-            args.invoice_id,
-            recipient.short(),
-            cfg.lookback
+            "Ainda não pago — {inv} (carteira {recv}, últimas {n} txs)",
+            inv = args.invoice_id,
+            recv = recipient.short(),
+            n = cfg.lookback,
         )),
         paid: false,
     })
@@ -219,7 +218,7 @@ mod tests {
         )
         .unwrap();
         assert!(out.paid);
-        assert!(out.summary.contains("paid"));
+        assert!(out.summary.contains("PAGO"));
     }
 
     #[test]
@@ -249,6 +248,6 @@ mod tests {
         )
         .unwrap();
         assert!(!out.paid);
-        assert!(out.summary.contains("not seen"));
+        assert!(out.summary.contains("Ainda não pago") || out.summary.contains("nao pago"));
     }
 }

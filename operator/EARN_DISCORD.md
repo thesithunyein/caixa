@@ -21,15 +21,15 @@ https://github.com/thesithunyein/caixa/blob/main/SHOWCASE.md
 
 **Anything Else?**
 ```
-Caixa = Brazil shop terminal on ZeroClaw Telegram. BRL charge → Pay QR + Solana Pay USDC → watch closes loop. T1/T0 no keys. Injection fails closed on camera. Evening setup in /operator.
+Caixa = real shop payment terminal on Telegram: charge in BRL, customer pays USDC in Phantom, owner checks paid in the same chat. Agent never holds keys. Injection refuses on camera. Day sheet + evening setup in /operator.
 ```
 
 ## Discord `#solana-bounty`
 
 ```
-Caixa showcase — shop payment terminal someone can run on ZeroClaw Telegram (Brazil-first).
+Caixa — shop payment terminal for merchants who already run on Telegram.
 
-Owner: “Cobra mesa 9: R$ 25” → Pay QR + solana: USDC. Customer pays in Phantom. Watch closes the loop. Prompt-injection refuse on camera. Agent never holds keys.
+Real daily loop: “Cobra mesa 9: R$ 25” → Pay QR → customer pays USDC in Phantom → “já pagou?” closes. Not a chat demo — tool refuses bad mint / key injection on camera. Agent never holds keys.
 
 Video: <NEW_YOUTUBE>
 Product: https://github.com/thesithunyein/caixa
