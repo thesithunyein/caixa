@@ -4,7 +4,7 @@
 
 Watches the merchant address for memo `INV=<invoice_id>` (or a Solana Pay reference) and returns a short Telegram-ready alert (~200 tokens, never a raw signature dump). Pair with a cron SOP.
 
-> Part of **[Caixa](../../CAIXA.md)**. SOP: [`sop-payment-watch.yaml`](sop-payment-watch.yaml)
+> Part of **[Caixa](../../README.md)**. SOP: [`sop-payment-watch.yaml`](sop-payment-watch.yaml)
 
 ## Custody: T0 (Read)
 
