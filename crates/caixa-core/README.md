@@ -22,4 +22,4 @@ Proven by: `caixa-charge`, `caixa-transfer-build`, `caixa-watch`.
 cargo test
 ```
 
-See **[CAIXA.md](../../CAIXA.md)**. Dual-licensed: [LICENSE-MIT](LICENSE-MIT) / [LICENSE-APACHE](LICENSE-APACHE).
+See **[README.md](../../README.md)** / [SHOWCASE.md](../../SHOWCASE.md). Dual-licensed: [LICENSE-MIT](LICENSE-MIT) / [LICENSE-APACHE](LICENSE-APACHE).

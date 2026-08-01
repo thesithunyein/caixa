@@ -4,7 +4,7 @@
 
 Builds a base64 legacy transaction (ATA create-idempotent + invoice memo + transfer). A human or Squads signs. Solves bounty Trap #1: approval queues kill recent blockhashes — **durable nonce is required by default**.
 
-> Part of **[Caixa](../../CAIXA.md)**.
+> Part of **[Caixa](../../README.md)**.
 
 ## Custody: T1 (Build)
 

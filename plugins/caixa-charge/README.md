@@ -4,7 +4,7 @@
 
 Turns `Cobra mesa 4: R$ 25` into a `solana:` USDC transfer URL + QR-ready payload. Portuguese-friendly description so Brazilian merchants can drive it from Telegram.
 
-> Part of **[Caixa](../../CAIXA.md)** — BRL invoice → USDC settle → watch closes the loop.
+> Part of **[Caixa](../../README.md)** — BRL invoice → USDC settle → watch closes the loop. Bot: [@caixa_zeroclaw_bot](https://t.me/caixa_zeroclaw_bot).
 
 ## Custody: T1 (Build)
 
