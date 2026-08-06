@@ -11,7 +11,7 @@
 
 | Asset | Link |
 |-------|------|
-| Video | *(re-record: charge → QR → wallet pay → PAGO → injection refuse ≤3 min)* |
+| Video | https://youtu.be/zneKtCTPDtg |
 | Product repo | https://github.com/thesithunyein/caixa |
 | Telegram bot | https://t.me/caixa_zeroclaw_bot |
 | Day sheet | [operator/DAY.md](operator/DAY.md) |
@@ -23,7 +23,6 @@
 | Config (redacted) | [operator/config.example.toml](operator/config.example.toml) |
 | Cron SOP | [plugins/caixa-watch/sop-payment-watch.yaml](plugins/caixa-watch/sop-payment-watch.yaml) |
 | Optional stock skill | [skills/caixa-terminal/SKILL.md](skills/caixa-terminal/SKILL.md) |
-| X | https://x.com/thesithunyein/status/2079171135250571466 |
 
 ---
 
